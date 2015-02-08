@@ -1,6 +1,6 @@
 use utf8;
 
-foreach $file_name (@ARGV){
+foreach $file_name (@ARGV) {
     open(IN, , "<", $file_name) or die "Cannot open $file_name: $!";
     @lines = <IN>;
     $file_string = join(" ", @lines);
@@ -23,7 +23,7 @@ foreach $file_name (@ARGV){
             $text =~ tr/A-Z/a-z/;
         }
 
-        foreach $word (sort split(/\s+/, $text)) {
+        foreach $word (split(/\s+/, $text)) {
             $word =~ s/(\.|,)$//;
             print "$number $word\n";
         }

@@ -3,10 +3,15 @@ use utf8;
 %index = ();
 %result = ();
 
-foreach $file_name (@ARGV){
+if (@ARGV == 0) {
+    print STDERR "Usage: $0 <index file>\n";
+    exit;
+}
+
+foreach $file_name (@ARGV) {
     open(FILE, "<", $file_name) or die "Cannot open $file: $!";
 
-    while ($line = <FILE>){
+    while ($line = <FILE>) {
         chomp $line;
         @row = split(/\s+/, $line);
         $index{$row[0]}{$row[1]} = $row[4];
@@ -17,8 +22,8 @@ foreach $file_name (@ARGV){
 while ($line = <STDIN>) {
     chomp $line;
     @row = split(/\s+/, $line);
-    while (($doc_id, $terms) = each(%index)){
-        while (($term, $weight) = each($terms)){
+    while (($doc_id, $terms) = each(%index)) {
+        while (($term, $weight) = each($terms)) {
             if ($term eq $row[1]) {
                 $result{$doc_id} += $weight;
             }

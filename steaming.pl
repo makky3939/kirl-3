@@ -1,7 +1,7 @@
 use utf8;
 
 while($line = <STDIN>) {
-    chomp($line);
+    chomp $line;
     @row = split(/\s+/, $line);
     $word = $row[1];
     $word =~ s/(s$)|(er$)|(est$)|(ed$)|(ing$)//g;
